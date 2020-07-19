@@ -1,5 +1,6 @@
 var textCnt = 0;
 var ws = null;
+var blockN = 4;
 
 window.onload = function()
 {
@@ -11,12 +12,6 @@ window.onload = function()
     }catch(err){
         Console.error(err);
     }
-/*
-    var sendBtn = document.getElementById('textbox');
-    sendBtn.addEventListener('click', function(){
-        sendMessage();
-    })
-*/
 
     ws.onmessage = function(msg){
         onReceiveMsg(msg);
@@ -32,8 +27,28 @@ function sendMessage()
 
 function onReceiveMsg(msg)
 {
-    textCnt += 1;
-    var newMessage = document.getElementById('text' + textCnt);
-    newMessage.innerHTML = (msg.data + '<br>');
+    textCnt += textCnt <= blockN ? 1 : 0;
+    if(textCnt > blockN)
+        shiftText();
+
+    //新規メッセージを設定する
+    setTextAt(Math.min(blockN, textCnt), msg);
+    //文字をアーチ状にする
     $('.chattext').arctext({radius: 160, dir: -1}); 
+}
+
+function shiftText()
+{
+    for(let i = 1; i < blockN; i++)
+    {
+        var prev = document.getElementById('text' + i);
+        var overwrite = document.getElementById('text' + (i+1));
+        prev.innerHTML = overwrite.innerHTML;
+    }
+}
+
+function setTextAt(index, msg)
+{
+    var newMessage = document.getElementById('text' + index);
+    newMessage.innerHTML = (msg.data + '<br>'); 
 }
