@@ -1,0 +1,69 @@
+body{
+    background-image: url("../img/chat_bg.png");
+    background-color: rgba(255,255,255,0.2);
+    background-blend-mode: lighten;
+}
+
+.icon{
+    width: 420px;
+    position: absolute;
+    top: -190px;
+    left: -190px;
+    z-index: 1;
+}
+
+#logbutton{
+    cursor: pointer;
+}
+
+.contents{
+    position: absolute;
+    top: 300px;
+    left: 150px;
+}
+
+.contents li{
+    font-family: "ＭＳ ゴシック", monospace;
+}
+
+.textblock{
+    position: absolute;
+    top: 400px;
+    left: 10px;
+}
+
+#textbox{
+    width: 200%;
+}
+
+.chatcircles{
+    width: 370px;
+    height: 370px;
+    position: absolute;
+    top: -210px;
+    left: -185px;
+    background: linear-gradient(#cc0, #ef2);
+    border-radius: 50%;
+    -webkit-clip-path: polygon(53% 0%, 53% 100%, 100% 100%, 100% 0%);
+    z-index: 0;
+}
+
+#text1{
+    font-size: 12pt;
+    -moz-transform: rotateZ(-45deg);
+    -webkit-transform: rotateZ(-45deg);
+    -o-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+    z-index: 2;
+}
+
+#text2{
+    font-size: 12pt;
+    -moz-transform: rotateZ(-45deg);
+    -webkit-transform: rotateZ(-45deg);
+    -o-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+    z-index: 2;
+}

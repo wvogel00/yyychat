@@ -1,0 +1,51 @@
+<!DOCTYPE>
+  <html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.arctext.js"></script>
+        <script type="text/javascript" src="js/arch.js"></script>
+        <script type="text/javascript" src="js/chat.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/chat.css">
+        <meta charset="UTF-8">
+        <title>ゆゆゆチャット</title>
+    </head>
+    <body>
+        <img src="img/circle.png" class="icon"/>
+        <img src="img/logButton.png" class="icon" id="logbutton" />
+        <div class="chatcircles">  
+        </div>
+
+    <div class="contents" id="chatList">
+      <div class="chattext" id="text1">うどんたべたい食べたい</div>
+      <div class="chattext" id="text2">おそばたべたいおそばたべたい</div>
+      <div class="chattext" id="text3"></div>
+      <div class="chattext" id="text4"></div>
+    </div>
+
+    <form class="textblock">
+        <input type="text" id="textbox"/>
+    </form>
+        <script>
+            try {
+              var ws = new WebSocket('ws://localhost:3000/');
+            } catch (err) {
+              console.error(err);
+            }
+
+            $("form").submit(function(){
+                ws.send($('input').val());
+                $('input').val('');
+                return false;
+            });
+
+            ws.onmessage = function (msg) {
+                var newMessage = document.createElement("li");
+                newMessage.setAttribute("id","archtext2");
+                newMessage.innerHTML = (msg.data + '<br>');
+                var msgList = document.getElementById("chatList");
+                msgList.appendChild(newMessage);
+                $('.chattext').arctext({radius: 160, dir: -1}); 
+            }
+        </script>
+    </body>
+  </html>
