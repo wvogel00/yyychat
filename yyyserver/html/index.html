@@ -16,36 +16,25 @@
         </div>
 
     <div class="contents" id="chatList">
-      <div class="chattext" id="text1">うどんたべたい食べたい</div>
-      <div class="chattext" id="text2">おそばたべたいおそばたべたい</div>
+      <div class="chattext" id="text1"></div>
+      <div class="chattext" id="text2"></div>
       <div class="chattext" id="text3"></div>
       <div class="chattext" id="text4"></div>
     </div>
 
-    <form class="textblock">
+    <form onsubmit="return false;" class="textblock">
         <input type="text" id="textbox"/>
     </form>
         <script>
-            try {
-              var ws = new WebSocket('ws://localhost:3000/');
-            } catch (err) {
-              console.error(err);
-            }
-
             $("form").submit(function(){
-                ws.send($('input').val());
-                $('input').val('');
-                return false;
+                sendMessage();
             });
 
+            /*
             ws.onmessage = function (msg) {
-                var newMessage = document.createElement("li");
-                newMessage.setAttribute("id","archtext2");
-                newMessage.innerHTML = (msg.data + '<br>');
-                var msgList = document.getElementById("chatList");
-                msgList.appendChild(newMessage);
-                $('.chattext').arctext({radius: 160, dir: -1}); 
+                onReceiveMsg(msg);
             }
+            */
         </script>
     </body>
   </html>

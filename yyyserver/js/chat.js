@@ -1,25 +1,39 @@
-function formPost(input_id)
+var textCnt = 0;
+var ws = null;
+
+window.onload = function()
 {
-    var sendStr = document.getElementById(input_id).value;
-    if(sendStr != null && sendStr != '')
+    $('.chattext').arctext({radius: 160, dir: -1});     
+
+    try
     {
-        document.getElementById(input_id).value = "";
+        ws = new WebSocket('ws://localhost:3000');
+    }catch(err){
+        Console.error(err);
     }
-    
-    try{
-        var ws = new WebSocket('ws://localhost:3000/');
-    }catch(e){
-        console.error(e);
-    }
+/*
+    var sendBtn = document.getElementById('textbox');
+    sendBtn.addEventListener('click', function(){
+        sendMessage();
+    })
+*/
 
-    ws.send(sendStr);
+    ws.onmessage = function(msg){
+        onReceiveMsg(msg);
+    }
+}
+
+function sendMessage()
+{
+    ws.send($('input').val());
+    $('input').val('');
     //return false;
+};
 
-    ws.onmessage = function (msg){
-        var newPost = document.createElement("li");
-        newPost.appendChild(msg.data + '<br>');
-        var allPosts = document.getElementById("chatList");
-        allPosts.appendChild(newPost);
-        // $('ul').prepend(msg.data + '<br>');
-    }
+function onReceiveMsg(msg)
+{
+    textCnt += 1;
+    var newMessage = document.getElementById('text' + textCnt);
+    newMessage.innerHTML = (msg.data + '<br>');
+    $('.chattext').arctext({radius: 160, dir: -1}); 
 }
