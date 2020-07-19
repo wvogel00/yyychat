@@ -45,7 +45,8 @@ app req respond = do
         [] -> respond $ serveFile "text/html" "html/index.html"
         ["js", js] -> respond.serveFile "text/javascript" $ "js/" ++ unpack js
         ["css", css] -> respond.serveFile "text/css" $ "css/" ++ unpack css
-        ["img", img] -> respond.serveFile "image/png" $ "img/" ++ unpack img
+        ["img", img] ->  respond.serveFile "image/png" $ "img/" ++ unpack img
+        ["favicon.ico"] -> respond $ serveFile "image/x-icon" "img/favicon.ico"
 
 serveFile mime filePath = responseFile status200 [("Content-Type",mime)] filePath Nothing
 
