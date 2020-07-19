@@ -48,17 +48,8 @@ body{
     z-index: 0;
 }
 
-#text1{
-    font-size: 12pt;
-    -moz-transform: rotateZ(-45deg);
-    -webkit-transform: rotateZ(-45deg);
-    -o-transform: rotateZ(-45deg);
-    -ms-transform: rotateZ(-45deg);
-    transform: rotateZ(-45deg);
-    z-index: 2;
-}
 
-#text2{
+.chattext{
     font-size: 12pt;
     -moz-transform: rotateZ(-45deg);
     -webkit-transform: rotateZ(-45deg);
